@@ -19,11 +19,16 @@ function SalesCard() {
 
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/sales`)
+        const dateMin = minDate.toISOString().slice(0, 10);
+        const dateMax = maxDate.toISOString().slice(0, 10);
+
+        console.log(dateMin);
+
+        axios.get(`${BASE_URL}/sales?minDate=${dateMin}&maxDate=${dateMax}`)
             .then(response => {
                 setSales(response.data.content);
             })
-    }, []);
+    }, [minDate, maxDate]);
 
 
     return (
